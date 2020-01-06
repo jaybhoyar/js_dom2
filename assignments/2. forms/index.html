@@ -7,7 +7,8 @@
 		<title>Forms</title>
 		<style>
 			body {
-				font-family: "Helvetica", sans-serif;
+				font-family: 'Lucida Sans', sans-serif;
+                letter-spacing: 1px;
 			}
 			.row {
 				text-align: center;
@@ -42,14 +43,18 @@
 			}
 			input {
 				width: 400px;
-				border: 1px solid #ccc;
+				border: 1px solid rgba(204, 204, 204, 0.838);
 				margin: 0px 30px;
 				padding: 15px;
 				box-shadow: none;
 				font-size: 18px;
+                background-color: rgb(245, 245, 245);
 				border-radius: 4px;
 				outline: none;
 			}
+            input:focus{
+                border: 1px solid rgba(29, 29, 29, 0.838);
+            }
 			.submitbtn {
 				width: 140px;
 				padding: 10px;
@@ -63,17 +68,20 @@
 			}
 			.alert {
 				width: 415px;
-				border: 1px solid #fe958d;
+				border: 1px solid #fec8c8;
 				margin: 0px 30px;
 				padding: 8px;
 				margin-top: -18px;
 				margin-bottom: 30px;
 				box-shadow: none;
-				font-size: 14px;
-				border-radius: 4px;
-				background-color: #f7d2cf;
+				font-size: 14px;        
+				border-radius: 2px;
 				outline: none;
+                color: #831e1e;
+                font-weight: 600;
+                background-color: #fed7d7;
 				display: none;
+
 			}
 		</style>
 	</head>
@@ -121,8 +129,8 @@
                         <input
                         type="submit"
 							class="submitbtn"
-							value="register"
-							placeholder="Sign up"
+							value="Sign Up"
+							
 						/>
 						
 					</form>
