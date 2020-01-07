@@ -141,12 +141,18 @@ body {
 	align-content: flex-end;
 	font-weight: 100;
 }
-a {
-	text-decoration: none;
+button {
+	background-color: none;
+	border: none;
 	color: #6d6d6dfb;
-	padding: 0 8px;
+	padding: 4px 8px;
+	font-size: 14px;
+	outline: none;
+	border-radius: 5px;
 }
-
+button:focus {
+	border: 1px solid rgba(175, 47, 47, 0.523);
+}
 .container {
 	width: 500px;
 }
