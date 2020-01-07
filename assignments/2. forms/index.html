@@ -8,7 +8,7 @@
 		<style>
 			body {
 				font-family: 'Lucida Sans', sans-serif;
-                letter-spacing: 1px;
+                /* letter-spacing: 1px; */
 			}
 			.row {
 				text-align: center;
@@ -62,10 +62,13 @@
 				margin-bottom: 50px;
 				outline: none;
 				font-size: 18px;
-				background-color: rgb(18, 193, 18);
+				background-color: #55B358;
 				border-radius: 4px;
 				cursor: pointer;
 			}
+            .submitbtn:focus{
+                border: 1px solid rgb(10, 152, 10);
+            }
 			.alert {
 				width: 415px;
 				border: 1px solid #fec8c8;
@@ -78,7 +81,7 @@
 				border-radius: 2px;
 				outline: none;
                 color: #831e1e;
-                font-weight: 600;
+                font-weight: 500;
                 background-color: #fed7d7;
 				display: none;
 
@@ -131,13 +134,25 @@
 							class="submitbtn"
 							value="Sign Up"
 							
-						/>
-						
+						/>	
 					</form>
 				</div>
 			</div>
 		</div>
 		<script>
+            // function displayprofile(fullName, email, password){
+            //     document.querySelector("input").style.display = "none";
+            //     for(let i=0; i<3; i++){ 
+            //         let p = document.createElement("p");
+            //     }
+            //     document.querySelectorAll("p")[0].innerText = fullName;
+            //     document.querySelectorAll("p")[1].innerText = email;
+            //     document.querySelectorAll("p")[2].innerText = password;
+            //     document.querySelector(".flex").append(p[0]);
+            //     document.querySelector(".flex").append(p[1]);
+            //     document.querySelector(".flex").append(p[2]);
+               
+            // }
 			function error1(value) {
 				document.querySelector(".message1").style.display = "block";
 				document.querySelector(
@@ -167,23 +182,13 @@
 			function errorRemove3() {
 				document.querySelector(".message3").style.display = "none";
 			}
-			// function error2() {
-			// 	document.querySelector(".alert").style.display = "block";
-			// }
-			// function error2() {
-			// 	document.querySelector(".alert").style.display = "block";
-			// }
+			
 
 			function check() {
 				var fullName = document.signUpform.fullName.value;
 				var email = document.signUpform.email.value;
 				var password = document.signUpform.password.value;
-				// if (fullname != null || fullname != "") {
-				// 	var btn = (document.getElementById(
-				// 		"button"
-				// 	).disabled = false);
-				// 	btn.addEventListener("click", showProfile);
-				// }
+				
 				if (fullName == null || fullName == "") {
 					setTimeout(() => error1("Name"), 0);
 					setTimeout(errorRemove1, 3000);
@@ -197,9 +202,7 @@
 					setTimeout(errorRemove3, 3000);
 					return false;
 				} else {
-					alert(
-						`You are ${fullName} Your email: ${email} and Password is ${password}`
-					);
+					alert(`${fullName} ${email}  ${password}`);
 				}
 			}
 
