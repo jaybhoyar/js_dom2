@@ -1,6 +1,7 @@
 // JS
 let input = document.querySelector("input[type=text]");
 let ul = document.querySelector("ul");
+let footerList = document.querySelector(".footer");
 
 function addTodo(event) {
 	// console.log(event.target.value);
@@ -15,7 +16,9 @@ function addTodo(event) {
 		li.classList.add("li_styles");
 		ul.append(li);
 		li.append(checkInput, p, span);
+		footerList.style.display = "block";
 		event.target.value = "";
+
 		p.addEventListener("dblclick", e => {
 			// console.log(e.target);
 			let currentP = e.target;
