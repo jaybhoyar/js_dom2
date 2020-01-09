@@ -4,12 +4,13 @@ let ul = document.querySelector("ul");
 let footerList = document.querySelector(".footer");
 let counter = document.querySelector(".counter");
 let state = JSON.parse(localStorage.getItem("todoArr")) || [];
-let id = -1;
+let id = Date.now();
 let para = document.querySelector(".para");
 let all_button = document.querySelector("#all_button");
 let active_button = document.querySelector("#active_button");
 let completed_button = document.querySelector("#completed_button");
 let clearCompleted = document.querySelector(".item-completed");
+viewTodo(state);
 
 function AddState(event) {
 	if (event.keyCode === 13 && event.target.value.trim() != "") {
@@ -23,6 +24,7 @@ function AddState(event) {
 		localStorage.setItem("todoArr", JSON.stringify(state));
 		event.target.value = "";
 		todoArray = JSON.parse(localStorage.getItem("todoArr"));
+
 		viewTodo(todoArray);
 	}
 }
@@ -40,10 +42,11 @@ function viewTodo(todoArray) {
 		checkInput.checked = i.isDone;
 		checkInput.type = "checkbox";
 		li.classList.add("li_styles");
+		li.setAttribute("data-index", i.id);
 		spanX.className = "remove_items";
 		spanX.setAttribute("data-key", i.id);
 		p.innerHTML = i.name;
-		spanX.innerHTML = "X";
+		spanX.innerHTML = "×";
 		ul.append(li);
 		li.append(checkInput, p, spanX);
 		let checkId = checkInput.parentElement.dataset.id;
@@ -58,8 +61,8 @@ function viewTodo(todoArray) {
 
 	if (todoArray.length > 0) {
 		footerList.style.display = "block";
-		clearCompleted.classList.remove("item-completed");
-		clearCompleted.classList.add("item-completed-1");
+		// clearCompleted.classList.remove("item-completed");
+		// clearCompleted.classList.add("item-completed-1");
 	} else {
 		footerList.style.display = "none";
 	}
@@ -73,13 +76,36 @@ function EditTodo(event) {
 		editInput.type = "text";
 		editInput.classList.add("edit_input");
 		editInput.value = currentP.textContent;
-		console.log(editInput, "in edittodo");
-		console.log(currentP.parentElement, currentP);
 		currentP.parentElement.replaceChild(editInput, currentP);
+		editInput.parentElement.classList.remove("li_styles");
+		editInput.parentElement.classList.add("li_styles_input");
+		editInput.setAttribute("data-inputid", 0);
 		editInput.addEventListener("keydown", event1 => {
 			if (event1.keyCode === 13 && event1.target.value != "") {
+				editInput.parentElement.classList.add("li_styles");
+				editInput.parentElement.classList.remove("li_styles_input");
 				currentP.textContent = editInput.value;
 				editInput.parentElement.replaceChild(currentP, editInput);
+				let arr = state;
+				arr.map(i => {
+					if (i.id == currentP.parentElement.dataset.index) {
+						// console.log(currentP.parentElement.dataset.index, i.id);
+						i.name = currentP.textContent;
+						// console.log(i.name);
+					}
+				});
+				localStorage.setItem("todoArr", JSON.stringify(arr));
+				console.log(arr);
+				viewTodo(arr);
+				// state.map(i => {
+				// 	console.log(i.id);
+				// });
+
+				// state = state.forEach(i => {
+				// 	if (event1.target == i) {
+
+				// 	}
+				// });
 			}
 		});
 	}
@@ -88,6 +114,15 @@ function deleteTodo(event) {
 	if (event.target.tagName == "SPAN") {
 		let target = event.target;
 		state = state.filter(i => !(target.dataset.key == i.id));
+		state.forEach(i => {
+			if (i.isDone == true) {
+				clearCompleted.classList.remove("item-completed");
+				clearCompleted.classList.add("item-completed-1");
+			} else {
+				clearCompleted.classList.remove("item-completed-1");
+				clearCompleted.classList.add("item-completed");
+			}
+		});
 		localStorage.setItem("todoArr", JSON.stringify(state));
 		viewTodo(state);
 	}
@@ -97,15 +132,15 @@ function handleCheck(id) {
 	let len = 0;
 	let checked = state.map(item => {
 		if (item.id == id) {
-			len += len;
+			len++;
 			item.isDone = !item.isDone;
 
 			if (item.isDone == true) {
 				clearCompleted.classList.remove("item-completed");
 				clearCompleted.classList.add("item-completed-1");
 			} else {
-				clearCompleted.classList.add("item-completed");
 				clearCompleted.classList.remove("item-completed-1");
+				clearCompleted.classList.add("item-completed");
 			}
 			return item;
 		} else return item;
@@ -122,7 +157,6 @@ function allStatus() {
 	all_button.classList.add("button-border");
 	completed_button.classList.remove("button-border");
 	active_button.classList.remove("button-border");
-	console.log("in all");
 	viewTodo(state);
 }
 function activeStatus(event) {
@@ -144,10 +178,18 @@ function completedStatus(event) {
 }
 function clearStatus() {
 	let arr = state.filter(i => i.isDone == false);
+	arr.forEach(i => {
+		if (i.isDone == true) {
+			clearCompleted.classList.remove("item-completed");
+			clearCompleted.classList.add("item-completed-1");
+		} else {
+			clearCompleted.classList.remove("item-completed-1");
+			clearCompleted.classList.add("item-completed");
+		}
+	});
 	localStorage.setItem("todoArr", JSON.stringify(arr));
 	state = arr;
 	viewTodo(state);
-	footerList.style.display = "block";
 }
 input.addEventListener("keydown", AddState);
 ul.addEventListener("click", deleteTodo);
@@ -156,4 +198,3 @@ all_button.addEventListener("click", allStatus);
 all_button.classList.add("button-border");
 completed_button.addEventListener("click", completedStatus);
 clearCompleted.addEventListener("click", clearStatus);
-viewTodo(state);
