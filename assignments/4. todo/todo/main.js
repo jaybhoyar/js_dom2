@@ -19,16 +19,13 @@ function AddState(event) {
 			isDone: false,
 			id: ++id
 		};
-
 		state.push(todo);
 		localStorage.setItem("todoArr", JSON.stringify(state));
 		event.target.value = "";
 		todoArray = JSON.parse(localStorage.getItem("todoArr"));
-
 		viewTodo(todoArray);
 	}
 }
-
 function viewTodo(todoArray) {
 	ul.innerHTML = "";
 
@@ -61,8 +58,6 @@ function viewTodo(todoArray) {
 
 	if (todoArray.length > 0) {
 		footerList.style.display = "block";
-		// clearCompleted.classList.remove("item-completed");
-		// clearCompleted.classList.add("item-completed-1");
 	} else {
 		footerList.style.display = "none";
 	}
@@ -89,23 +84,12 @@ function EditTodo(event) {
 				let arr = state;
 				arr.map(i => {
 					if (i.id == currentP.parentElement.dataset.index) {
-						// console.log(currentP.parentElement.dataset.index, i.id);
 						i.name = currentP.textContent;
-						// console.log(i.name);
 					}
 				});
 				localStorage.setItem("todoArr", JSON.stringify(arr));
 				console.log(arr);
 				viewTodo(arr);
-				// state.map(i => {
-				// 	console.log(i.id);
-				// });
-
-				// state = state.forEach(i => {
-				// 	if (event1.target == i) {
-
-				// 	}
-				// });
 			}
 		});
 	}
@@ -174,7 +158,6 @@ function completedStatus(event) {
 	let arr = state.filter(i => i.isDone == true);
 	viewTodo(arr);
 	footerList.style.display = "block";
-	// all_button.classList.add("button-border");
 }
 function clearStatus() {
 	let arr = state.filter(i => i.isDone == false);
