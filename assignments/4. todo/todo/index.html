@@ -10,22 +10,26 @@
 	<body>
 		<div class="container">
 			<h1>todos</h1>
-			<input
-				type="text"
-				class="first-todo"
-				placeholder="What needs to be done?"
-			/>
+			<div class="box-shadow">
+				<input
+					type="text"
+					class="first-todo"
+					placeholder="What needs to be done?"
+				/>
 
-			<ul></ul>
+				<ul></ul>
+			</div>
+
 			<div class="footer">
 				<div class="footer-strip">
 					<div class="item-count">
-						0 item left
+						<span class="counter">0</span>
+						items left
 					</div>
 					<div class="item-status">
-						<button href="">All</button>
-						<button href="">Active</button>
-						<button href="">Completed</button>
+						<button id="all_button" href="">All</button>
+						<button id="active_button" href="">Active</button>
+						<button id="completed_button" href="">Completed</button>
 					</div>
 					<div class="item-completed">
 						Clear Completed

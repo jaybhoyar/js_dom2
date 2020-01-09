@@ -150,11 +150,12 @@ button {
 	outline: none;
 	border-radius: 5px;
 }
-button:focus {
+.button-border {
 	border: 1px solid rgba(175, 47, 47, 0.523);
 }
-.container {
-	width: 500px;
+
+.para {
+	width: 80%;
 }
 h1 {
 	padding: 20px 0;
@@ -172,6 +173,7 @@ h1 {
 	border: 1px solid rgba(226, 223, 223, 0.5);
 	font-size: 24px;
 	line-height: 34px;
+	/* box-shadow: 0px -7px 17px 1px rgba(0, 0, 0, 0.56); */
 }
 .first-todo::placeholder {
 	font-style: italic;
@@ -207,12 +209,12 @@ input[type="checkbox"] {
 .li_styles:hover span {
 	visibility: visible;
 }
-span {
+.remove_items {
 	color: rgb(194, 194, 194);
 	cursor: pointer;
 	visibility: hidden;
 }
-span:hover {
+.remove_items:hover {
 	color: rgb(208, 67, 67);
 }
 .edit_input {
@@ -238,6 +240,7 @@ span:hover {
 	height: 20px;
 	text-align: center;
 	border: 1px solid #e6e6e6;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 .border-adjust {
 	display: flex;
@@ -247,20 +250,25 @@ span:hover {
 	width: 500px;
 }
 .extra {
-	background-color: rgba(254, 254, 254, 0.454);
-	height: 5px;
+	background-color: rgba(254, 254, 254, 0.838);
+	height: 3px;
 	padding: 0px 38px;
 	border: 1px solid rgba(226, 223, 223, 0.947);
 	border-top: none;
 }
 
 .Border-1 {
-	width: 98%;
+	width: 99%;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 .Border-2 {
-	width: 96%;
-	box-shadow: 2px 5px 19px -2px rgba(0, 0, 0, 0.557);
+	width: 97%;
+
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 .item-status {
 	width: 50%;
+}
+.box-shadow {
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }

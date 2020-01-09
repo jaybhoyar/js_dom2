@@ -45,11 +45,14 @@
 					infoButton.classList.add("button");
 					infoButton.addEventListener("click", () => {
 						console.log("hello");
-					});
+					});  
 					document
 						.querySelector(".container")
 						.append(div, infoButton);
 				}
+				localStorage.setItem("now", Date.now());
+
+				
 			}
 			let data = [
 				{
