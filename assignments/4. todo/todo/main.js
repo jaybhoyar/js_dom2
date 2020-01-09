@@ -51,7 +51,8 @@ function viewTodo(todoArray) {
 		p.addEventListener("dblclick", EditTodo);
 		active_button.addEventListener("click", activeStatus);
 		if (i.isDone == true) {
-			
+			clearCompleted.classList.remove("item-completed");
+			clearCompleted.classList.add("item-completed-1");
 		}
 	});
 
