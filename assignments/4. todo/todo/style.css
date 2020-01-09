@@ -179,9 +179,7 @@ h1 {
 	font-style: italic;
 	color: rgb(230, 230, 230);
 }
-.first-todo:focus {
-	border: 1px solid rgba(175, 47, 47, 0.399);
-}
+
 
 ul {
 	list-style: none;
@@ -258,11 +256,11 @@ input[type="checkbox"] {
 }
 
 .Border-1 {
-	width: 99%;
+	width: 98%;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 .Border-2 {
-	width: 97%;
+	width: 96%;
 
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
@@ -271,4 +269,11 @@ input[type="checkbox"] {
 }
 .box-shadow {
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+}
+.item-completed {
+	visibility: hidden;
+}
+.item-completed-1 {
+	visibility: visible;
+	text-decoration: underline;
 }
