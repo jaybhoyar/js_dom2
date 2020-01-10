@@ -29,31 +29,50 @@ function AddState(event) {
 function viewTodo(todoArray) {
 	ul.innerHTML = "";
 
-	todoArray.forEach(i => {
+	todoArray.forEach((i, index) => {
 		let li = document.createElement("li");
 		let p = document.createElement("p");
 		li.setAttribute("data-id", i.id);
 		p.classList.add("para");
 		let spanX = document.createElement("span");
 		let checkInput = document.createElement("input");
-		checkInput.checked = i.isDone;
 		checkInput.type = "checkbox";
+		checkInput.setAttribute("data-id", todoArray.indexOf(i));
+		checkInput.id = "tick-" + index;
+		// creating label
+		const label = document.createElement("label");
+		label.setAttribute("for", "tick-" + index);
+		tickImgBox = document.createElement("div");
+		tickImgBox.className = "tick_img_box";
+		img = document.createElement("img");
+		img.className = "tick";
+		img.src = "tick.png";
+		// Apppending the label and input to li
+		tickImgBox.appendChild(img);
+		label.appendChild(tickImgBox);
+		li.appendChild(label);
+		checkInput.checked = i.isDone;
 		li.classList.add("li_styles");
 		li.setAttribute("data-index", i.id);
 		spanX.className = "remove_items";
 		spanX.setAttribute("data-key", i.id);
 		p.innerHTML = i.name;
 		spanX.innerHTML = "×";
+        li.append(checkInput, p, spanX);
 		ul.append(li);
-		li.append(checkInput, p, spanX);
 		let checkId = checkInput.parentElement.dataset.id;
 		checkInput.addEventListener("click", () => handleCheck(checkId));
 		p.addEventListener("dblclick", EditTodo);
 		active_button.addEventListener("click", activeStatus);
 		if (i.isDone == true) {
+			img.src = "tick.png";
 			clearCompleted.classList.remove("item-completed");
 			clearCompleted.classList.add("item-completed-1");
+		} else {
+            
+            img.src = "";
 		}
+		
 	});
 
 	if (todoArray.length > 0) {
