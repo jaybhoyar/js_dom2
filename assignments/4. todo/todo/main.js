@@ -1,43 +1,45 @@
 // JS
-let input = document.querySelector("input[type=text]");
-let ul = document.querySelector("ul");
-let footerList = document.querySelector(".footer");
+const input = document.querySelector("input[type=text]");
+const ul = document.querySelector("ul");
+const footerList = document.querySelector(".footer");
 let counter = document.querySelector(".counter");
 let state = JSON.parse(localStorage.getItem("todoArr")) || [];
 let id = Date.now();
-let para = document.querySelector(".para");
-let all_button = document.querySelector("#all_button");
-let active_button = document.querySelector("#active_button");
-let completed_button = document.querySelector("#completed_button");
-let clearCompleted = document.querySelector(".item-completed");
-viewTodo(state);
+const para = document.querySelector(".para");
+let toggleAll = document.querySelector(".toggle_all");
+let allButton = document.querySelector("#all_button");
+let activeButton = document.querySelector("#active_button");
+let completedButton = document.querySelector("#completed_button");
+let clearCompleted = document.querySelector(".item_completed");
 
 function AddState(event) {
 	if (event.keyCode === 13 && event.target.value.trim() != "") {
-		var todo = {
+		const todo = {
 			name: event.target.value,
 			isDone: false,
 			id: ++id
 		};
 		state.push(todo);
+
 		localStorage.setItem("todoArr", JSON.stringify(state));
 		event.target.value = "";
 		todoArray = JSON.parse(localStorage.getItem("todoArr"));
 		viewTodo(todoArray);
 	}
 }
+
 function viewTodo(todoArray) {
 	ul.innerHTML = "";
 
-	todoArray.forEach((i, index) => {
+	todoArray.forEach((todo, index) => {
 		let li = document.createElement("li");
 		let p = document.createElement("p");
-		li.setAttribute("data-id", i.id);
+		li.setAttribute("data-id", todo.id);
 		p.classList.add("para");
 		let spanX = document.createElement("span");
 		let checkInput = document.createElement("input");
 		checkInput.type = "checkbox";
-		checkInput.setAttribute("data-id", todoArray.indexOf(i));
+		checkInput.setAttribute("data-id", todoArray.indexOf(todo));
 		checkInput.id = "tick-" + index;
 		// creating label
 		const label = document.createElement("label");
@@ -51,28 +53,26 @@ function viewTodo(todoArray) {
 		tickImgBox.appendChild(img);
 		label.appendChild(tickImgBox);
 		li.appendChild(label);
-		checkInput.checked = i.isDone;
+		checkInput.checked = todo.isDone;
 		li.classList.add("li_styles");
-		li.setAttribute("data-index", i.id);
+		li.setAttribute("data-index", todo.id);
 		spanX.className = "remove_items";
-		spanX.setAttribute("data-key", i.id);
-		p.innerHTML = i.name;
+		spanX.setAttribute("data-key", todo.id);
+		p.innerHTML = todo.name;
 		spanX.innerHTML = "×";
-        li.append(checkInput, p, spanX);
+		li.append(checkInput, p, spanX);
 		ul.append(li);
 		let checkId = checkInput.parentElement.dataset.id;
 		checkInput.addEventListener("click", () => handleCheck(checkId));
 		p.addEventListener("dblclick", EditTodo);
-		active_button.addEventListener("click", activeStatus);
-		if (i.isDone == true) {
+		activeButton.addEventListener("click", activeStatus);
+		if (todo.isDone == true) {
 			img.src = "tick.png";
-			clearCompleted.classList.remove("item-completed");
-			clearCompleted.classList.add("item-completed-1");
+			clearCompleted.classList.remove("item_completed");
+			clearCompleted.classList.add("item_completed_1");
 		} else {
-            
-            img.src = "";
+			img.src = "";
 		}
-		
 	});
 
 	if (todoArray.length > 0) {
@@ -87,13 +87,11 @@ function EditTodo(event) {
 	if (event.target.tagName === "P") {
 		let currentP = event.target;
 		let editInput = document.createElement("input");
-		editInput.type = "text";
 		editInput.classList.add("edit_input");
 		editInput.value = currentP.textContent;
 		currentP.parentElement.replaceChild(editInput, currentP);
 		editInput.parentElement.classList.remove("li_styles");
 		editInput.parentElement.classList.add("li_styles_input");
-		editInput.setAttribute("data-inputid", 0);
 		editInput.addEventListener("keydown", event1 => {
 			if (event1.keyCode === 13 && event1.target.value != "") {
 				editInput.parentElement.classList.add("li_styles");
@@ -101,9 +99,9 @@ function EditTodo(event) {
 				currentP.textContent = editInput.value;
 				editInput.parentElement.replaceChild(currentP, editInput);
 				let arr = state;
-				arr.map(i => {
-					if (i.id == currentP.parentElement.dataset.index) {
-						i.name = currentP.textContent;
+				arr.map(todo => {
+					if (todo.id == currentP.parentElement.dataset.index) {
+						todo.name = currentP.textContent;
 					}
 				});
 				localStorage.setItem("todoArr", JSON.stringify(arr));
@@ -116,17 +114,19 @@ function EditTodo(event) {
 function deleteTodo(event) {
 	if (event.target.tagName == "SPAN") {
 		let target = event.target;
-		state = state.filter(i => !(target.dataset.key == i.id));
+		state = state.filter(todo => !(target.dataset.key == todo.id));
+		debugger;
 		state.forEach(i => {
 			if (i.isDone == true) {
-				clearCompleted.classList.remove("item-completed");
-				clearCompleted.classList.add("item-completed-1");
+				clearCompleted.classList.remove("item_completed");
+				clearCompleted.classList.add("item_completed_1");
 			} else {
-				clearCompleted.classList.remove("item-completed-1");
-				clearCompleted.classList.add("item-completed");
+				clearCompleted.classList.remove("item_completed_1");
+				clearCompleted.classList.add("item_completed");
 			}
 		});
 		localStorage.setItem("todoArr", JSON.stringify(state));
+
 		viewTodo(state);
 	}
 }
@@ -139,11 +139,11 @@ function handleCheck(id) {
 			item.isDone = !item.isDone;
 
 			if (item.isDone == true) {
-				clearCompleted.classList.remove("item-completed");
-				clearCompleted.classList.add("item-completed-1");
+				clearCompleted.classList.remove("item_completed");
+				clearCompleted.classList.add("item_completed_1");
 			} else {
-				clearCompleted.classList.remove("item-completed-1");
-				clearCompleted.classList.add("item-completed");
+				clearCompleted.classList.remove("item_completed_1");
+				clearCompleted.classList.add("item_completed");
 			}
 			return item;
 		} else return item;
@@ -153,50 +153,76 @@ function handleCheck(id) {
 	itemCount(len);
 }
 function itemCount() {
-	let arr = state.filter(i => i.isDone == false);
+	let arr = state.filter(todo => todo.isDone == false);
 	return arr.length;
 }
+function toggleAllInput() {
+	let arr = state;
+	let flag;
+	arr.filter(todo => {
+		if (todo.isDone == false) {
+			todo.isDone = true;
+			flag = 1;
+		}
+	});
+	localStorage.setItem("todoArr", JSON.stringify(arr));
+	viewTodo(arr);
+	if (flag != 1) {
+		arr.filter(todo => {
+			if (todo.isDone == true) {
+				todo.isDone = false;
+				flag = 0;
+			}
+		});
+	}
+	localStorage.setItem("todoArr", JSON.stringify(arr));
+	viewTodo(arr);
+}
 function allStatus() {
-	all_button.classList.add("button-border");
-	completed_button.classList.remove("button-border");
-	active_button.classList.remove("button-border");
+	allButton.classList.add("button_border");
+	completedButton.classList.remove("button_border");
+	activeButton.classList.remove("button_border");
 	viewTodo(state);
 }
-function activeStatus(event) {
-	all_button.classList.remove("button-border");
-	completed_button.classList.remove("button-border");
-	active_button.classList.add("button-border");
+function activeStatus() {
+	allButton.classList.remove("button_border");
+	completedButton.classList.remove("button_border");
+	activeButton.classList.add("button_border");
 	let arr = state.filter(i => i.isDone == false);
 	viewTodo(arr);
 	footerList.style.display = "block";
 }
-function completedStatus(event) {
-	all_button.classList.remove("button-border");
-	active_button.classList.remove("button-border");
-	completed_button.classList.add("button-border");
-	let arr = state.filter(i => i.isDone == true);
+function completedStatus() {
+	allButton.classList.remove("button_border");
+	activeButton.classList.remove("button_border");
+	completedButton.classList.add("button_border");
+	let arr = state.filter(todo => todo.isDone == true);
 	viewTodo(arr);
 	footerList.style.display = "block";
 }
 function clearStatus() {
-	let arr = state.filter(i => i.isDone == false);
-	arr.forEach(i => {
-		if (i.isDone == true) {
-			clearCompleted.classList.remove("item-completed");
-			clearCompleted.classList.add("item-completed-1");
+	let arr = state.filter(todo => todo.isDone == false);
+	arr.forEach(todo => {
+		if (todo.isDone == true) {
+			clearCompleted.classList.remove("item_completed");
+			clearCompleted.classList.add("item_completed_1");
 		} else {
-			clearCompleted.classList.remove("item-completed-1");
-			clearCompleted.classList.add("item-completed");
+			clearCompleted.classList.remove("item_completed_1");
+			clearCompleted.classList.add("item_completed");
 		}
 	});
 	localStorage.setItem("todoArr", JSON.stringify(arr));
 	state = arr;
 	viewTodo(state);
 }
+
+viewTodo(state);
+
 input.addEventListener("keydown", AddState);
 ul.addEventListener("click", deleteTodo);
-active_button.addEventListener("click", activeStatus);
-all_button.addEventListener("click", allStatus);
-all_button.classList.add("button-border");
-completed_button.addEventListener("click", completedStatus);
+activeButton.addEventListener("click", activeStatus);
+allButton.addEventListener("click", allStatus);
+allButton.classList.add("button_border");
+completedButton.addEventListener("click", completedStatus);
 clearCompleted.addEventListener("click", clearStatus);
+toggleAll.addEventListener("click", toggleAllInput);

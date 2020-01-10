@@ -128,11 +128,12 @@ table {
 	border-spacing: 0;
 }
 
-/* CSS  */
+/* Custom  CSS  ----------------------------------- */
+*::before,
+*::after,
 * {
 	font-weight: 100;
 }
-
 body {
 	font-family: "Helvetica Neue", sans-serif;
 	background-color: #f5f5f5;
@@ -142,6 +143,16 @@ body {
 	font-weight: 100;
 	color: #4d4d4d;
 	box-sizing: border-box;
+}
+.header {
+	background-color: #ffffff;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+}
+.flex {
+	display: flex;
+	justify-content: flex-start;
+	border-top: 1px solid rgba(226, 223, 223, 0.5);
+	border-bottom: 1px solid rgba(226, 223, 223, 0.5);
 }
 button {
 	background-color: none;
@@ -153,7 +164,7 @@ button {
 	border-radius: 5px;
 	cursor: pointer;
 }
-.button-border {
+.button_border {
 	border: 0.5px solid rgba(175, 47, 47, 0.2);
 }
 
@@ -167,19 +178,25 @@ h1 {
 	font-size: 100px;
 	color: rgba(175, 47, 47, 0.15);
 }
-
-.first-todo {
-	padding: 16px 16px 16px 60px;
+.toggle_img_container {
+	padding: 16px 16px;
+	padding-right: 0px;
+}
+img {
+	width: 60%;
+	cursor: pointer;
+}
+.first_todo {
+	padding: 16px 16px;
+	padding-left: 0px;
 	border: none;
 	outline: none;
 	width: 503px;
-	border-top: 1px solid rgba(226, 223, 223, 0.5);
-	border-bottom: 1px solid rgba(226, 223, 223, 0.5);
 	font-size: 24px;
 	line-height: 34px;
 	/* box-shadow: 0px -7px 17px 1px rgba(0, 0, 0, 0.56); */
 }
-.first-todo::placeholder {
+.first_todo::placeholder {
 	font-style: italic;
 	color: rgb(230, 230, 230);
 }
@@ -274,7 +291,7 @@ input[type="checkbox"] {
 		0 9px 1px -3px rgba(0, 0, 0, 0.2), 0 16px 0 -6px #f6f6f6,
 		0 17px 2px -6px rgba(0, 0, 0, 0.2);
 }
-.footer-strip {
+.footer_strip {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -286,13 +303,7 @@ input[type="checkbox"] {
 	text-align: center;
 	border-top: none;
 }
-.border-adjust {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 0px 39px;
-	width: 500px;
-}
+
 .extra {
 	background-color: rgba(254, 254, 254, 0.838);
 	height: 3px;
@@ -301,19 +312,17 @@ input[type="checkbox"] {
 	border-top: none;
 }
 
-.item-status {
+.item_status {
 	width: 50%;
 }
-.box-shadow {
-	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
-}
-.item-completed {
+
+.item_completed {
 	visibility: hidden;
 }
-.item-completed-1 {
+.item_completed_1 {
 	visibility: visible;
 }
-.item-completed-1:hover {
+.item_completed_1:hover {
 	cursor: pointer;
 	text-decoration: underline;
 }
