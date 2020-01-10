@@ -115,7 +115,7 @@ function deleteTodo(event) {
 	if (event.target.tagName == "SPAN") {
 		let target = event.target;
 		state = state.filter(todo => !(target.dataset.key == todo.id));
-		debugger;
+
 		state.forEach(i => {
 			if (i.isDone == true) {
 				clearCompleted.classList.remove("item_completed");
@@ -125,6 +125,7 @@ function deleteTodo(event) {
 				clearCompleted.classList.add("item_completed");
 			}
 		});
+
 		localStorage.setItem("todoArr", JSON.stringify(state));
 
 		viewTodo(state);

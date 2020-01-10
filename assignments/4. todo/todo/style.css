@@ -180,11 +180,12 @@ h1 {
 }
 .toggle_img_container {
 	padding: 16px 16px;
-	padding-right: 0px;
+  padding-right: 0px;
+  cursor: pointer;
 }
 img {
 	width: 60%;
-	cursor: pointer;
+	
 }
 .first_todo {
 	padding: 16px 16px;
