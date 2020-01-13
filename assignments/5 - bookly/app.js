@@ -7,9 +7,9 @@ let bookArr = JSON.parse(localStorage.getItem("bookArr")) || [];
 id = Date.now();
 
 function addBook(event) {
-	if (event.keyCode == 13 && event.target.value.trim() != "") {
+	if (input.value.trim() != "") {
 		let book = {
-			name: event.target.value,
+			name: input.value,
 			id: ++id
 		};
 		bookArr.push(book);
@@ -56,11 +56,13 @@ function deleteBook(event) {
 }
 
 function searchBook(event) {
-	let searchWord = event.target.value.toLowerCase();
-	let searchedArr = bookArr.filter(book =>
-		book.name.toLowerCase().includes(searchWord)
-	);
-	viewBook(searchedArr);
+	if (event.target.value.trim() != "") {
+		let searchWord = event.target.value.toLowerCase();
+		let searchedArr = bookArr.filter(book =>
+			book.name.toLowerCase().includes(searchWord)
+		);
+		viewBook(searchedArr);
+	}
 }
 function handleCheck(event) {
 	if (event.target.checked == true) {
@@ -70,7 +72,7 @@ function handleCheck(event) {
 	}
 }
 viewBook(bookArr);
-input.addEventListener("keydown", addBook);
+// input.addEventListener("keydown", addBook);
 searchinput.addEventListener("keyup", searchBook);
 checkbox.addEventListener("click", handleCheck);
-// addbtn.addEventListener("click", addBookByButton);
+addbtn.addEventListener("click", addBook);
