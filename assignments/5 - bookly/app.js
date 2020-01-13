@@ -1,6 +1,7 @@
 const input = document.querySelector(".addbook_input");
 const searchinput = document.querySelector(".search_input");
 const addbtn = document.querySelector(".add_button");
+const checkbox = document.querySelector("#hide");
 const ul = document.querySelector("ul");
 let bookArr = JSON.parse(localStorage.getItem("bookArr")) || [];
 id = Date.now();
@@ -61,8 +62,15 @@ function searchBook(event) {
 	);
 	viewBook(searchedArr);
 }
-
+function handleCheck(event) {
+	if (event.target.checked == true) {
+		ul.style.display = "none";
+	} else {
+		ul.style.display = "block";
+	}
+}
 viewBook(bookArr);
 input.addEventListener("keydown", addBook);
 searchinput.addEventListener("keyup", searchBook);
+checkbox.addEventListener("click", handleCheck);
 // addbtn.addEventListener("click", addBookByButton);
