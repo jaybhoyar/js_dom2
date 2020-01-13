@@ -50,13 +50,6 @@
 			<button class="btn" id="reset">Reset</button>
 		</div>
 		<script>
-			document
-				.querySelector("#increment")
-				.addEventListener("click", increment);
-			document
-				.querySelector("#decrement")
-				.addEventListener("click", decrement);
-			document.querySelector("#reset").addEventListener("click", reset);
 			function increment() {
 				var count = document.querySelector(".countValue");
 				count.textContent = Number(count.textContent) + 1;
@@ -69,6 +62,13 @@
 				var count = document.querySelector(".countValue");
 				count.textContent = 0;
 			}
+			document
+				.querySelector("#increment")
+				.addEventListener("click", increment);
+			document
+				.querySelector("#decrement")
+				.addEventListener("click", decrement);
+			document.querySelector("#reset").addEventListener("click", reset);
 		</script>
 	</body>
 </html>
