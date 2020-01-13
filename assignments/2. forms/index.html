@@ -1,10 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Forms</title>
-  </head>
-  <body></body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Forms</title>
+		<style>
+			body {
+				font-family: 'Lucida Sans', sans-serif;
+                /* letter-spacing: 1px; */
+			}
+			.row {
+				text-align: center;
+				margin-top: 100px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.container {
+				width: 50%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: 50px;
+				box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+					0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+					0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+			}
+			.flex {
+				display: flex;
+				flex-direction: column;
+			}
+			h1 {
+				font-size: 45px;
+				color: rgba(24, 24, 24, 0.934);
+				text-shadow: 2px 2px 2px rgba(142, 142, 142, 0.968);
+			}
+			form {
+				width: 100%;
+				margin: 0 auto;
+				text-align: center;
+			}
+			input {
+				width: 400px;
+				border: 1px solid rgba(204, 204, 204, 0.838);
+				margin: 0px 30px;
+				padding: 15px;
+				box-shadow: none;
+				font-size: 18px;
+                background-color: rgb(245, 245, 245);
+				border-radius: 4px;
+				outline: none;
+			}
+            input:focus{
+                border: 1px solid rgba(29, 29, 29, 0.838);
+            }
+			.submitbtn {
+				width: 140px;
+				padding: 10px;
+				margin-top: 20px;
+				margin-bottom: 50px;
+				outline: none;
+				font-size: 18px;
+				background-color: #55B358;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+            .submitbtn:focus{
+                border: 1px solid rgb(10, 152, 10);
+            }
+			.alert {
+				width: 415px;
+				border: 1px solid #fec8c8;
+				margin: 0px 30px;
+				padding: 8px;
+				margin-top: -18px;
+				margin-bottom: 30px;
+				box-shadow: none;
+				font-size: 14px;        
+				border-radius: 2px;
+				outline: none;
+                color: #831e1e;
+                font-weight: 500;
+                background-color: #fed7d7;
+				display: none;
+
+			}
+		</style>
+	</head>
+	<body">
+		<div class="row">
+			<div class="container">
+				<div>
+					<h1>Sign Up</h1>
+					<form action="" name="signUpform" onsubmit="return check()">
+						<div class="flex">
+							<input
+								class="input-field"
+								id="fullname"
+								type="text"
+								placeholder="Full Name"
+								name="fullName"
+							/><br />
+							<div class="alert message1">
+								Name Can't be Empty
+							</div>
+						</div>
+						<div class="flex">
+							<input
+								class="input-field"
+								type="text"
+								placeholder="Email"
+								name="email"
+							/><br />
+							<div class="alert message2">
+								Email Can't be Empty
+							</div>
+						</div>
+						<div class="flex">
+							<input
+								class="input-field"
+								type="password"
+								name="password"
+								placeholder="Password"
+							/><br />
+							<div class="alert message3">
+								Password Can't be Empty
+							</div>
+						</div>
+
+                        <input
+                        type="submit"
+							class="submitbtn"
+							value="Sign Up"
+							
+						/>	
+					</form>
+				</div>
+			</div>
+		</div>
+		<script>
+            // function displayprofile(fullName, email, password){
+            //     document.querySelector("input").style.display = "none";
+            //     for(let i=0; i<3; i++){ 
+            //         let p = document.createElement("p");
+            //     }
+            //     document.querySelectorAll("p")[0].innerText = fullName;
+            //     document.querySelectorAll("p")[1].innerText = email;
+            //     document.querySelectorAll("p")[2].innerText = password;
+            //     document.querySelector(".flex").append(p[0]);
+            //     document.querySelector(".flex").append(p[1]);
+            //     document.querySelector(".flex").append(p[2]);
+               
+            // }
+			function error1(value) {
+				document.querySelector(".message1").style.display = "block";
+				document.querySelector(
+					".message1"
+				).innerHTML = `${value} Can't be Empty`;
+			}
+
+			function errorEmail1(value) {
+				document.querySelector(".message2").style.display = "block";
+				document.querySelector(
+					".message2"
+				).innerHTML = `${value} Can't be Empty`;
+			}
+
+			function errorPassword1(value) {
+				document.querySelector(".message3").style.display = "block";
+				document.querySelector(
+					".message3"
+				).innerHTML = `${value} Can't be Empty`;
+			}
+			function errorRemove1() {
+				document.querySelector(".message1").style.display = "none";
+			}
+			function errorRemove2() {
+				document.querySelector(".message2").style.display = "none";
+			}
+			function errorRemove3() {
+				document.querySelector(".message3").style.display = "none";
+			}
+			
+
+			function check() {
+				var fullName = document.signUpform.fullName.value;
+				var email = document.signUpform.email.value;
+				var password = document.signUpform.password.value;
+				
+				if (fullName == null || fullName == "") {
+					setTimeout(() => error1("Name"), 0);
+					setTimeout(errorRemove1, 3000);
+					return false;
+				} else if (email == null || email == "") {
+					setTimeout(() => errorEmail1("Email"), 0);
+					setTimeout(errorRemove2, 3000);
+					return false;
+				} else if (password == null || password == "") {
+					setTimeout(() => errorPassword1("Password"), 0);
+					setTimeout(errorRemove3, 3000);
+					return false;
+				} else {
+					alert(`${fullName} ${email}  ${password}`);
+				}
+			}
+
+			// }
+		</script>
+	</body>
 </html>
